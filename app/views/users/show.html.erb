@@ -1,7 +1,37 @@
-<h1>Users</h1>
+<div class="container">
 
-<%= @user.name %>
+    <div class="row">
 
-<%= attachment_image_tag @user, :profile_image %>
+        <div class="col-lg-3">
 
-<%= @user.introduction %>
+            <% if flash[:notice] %>
+                <p><%= flash[:notice] %></p>
+            <% end %>
+            <%= render 'users/user_info' %>
+
+            <%= render 'books/new_book', book: @book %>
+
+         </div>
+
+        <div class="col-lg-9">
+
+        <h1>Users</h1>
+
+
+            <table class="table">
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Opinion</th>
+                    </tr>
+                <% @books.each do |book| %>
+                    <tr>
+                        <td><%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: 'no_image.jpg', :size => '60x60'%></td>
+                        <td><%= link_to "#{book.title}", book_path(book.id) %></td>
+                        <td><%= book.body %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>

@@ -10,62 +10,87 @@
   </head>
 
   <body>
-
-    <div class="header">
-      <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
+<%#
+<div class="container">
+  <div class="row">
+    <div class="col"> %>
+      <header class="navbar navbar-inverse ">
+      <%# navbar-fixed-topはposition: absoluteと同じ効果を持つ %>
         <div class="container relative">
-          <div class="navbar-header">
-            <a class="navbar-logo" href='/'>Bookers</a>
+          <nav class="nav navbar-nav navbar-left">
+              <%# <a class="navbar-logo" href='/'> %>
+            <span class="header-title">Bookers</span>
+              <%# </a> %>
 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
+              <%# <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button> %>
+          </nav>
 
-          <div id="slidemenu">
+          <nav>
             <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
             <% if user_signed_in? %>
               <li class="#">
-                <%= link_to 'Home', user_path(current_user.id) %>
+                <%= link_to 'Home', user_path(current_user.id), class: "glyphicon glyphicon-home" %>
               </li>
 
               <li class="#">
-                <%= link_to 'Users', users_path %>
+                <%= link_to 'Users', users_path, class: "glyphicon glyphicon-user" %>
               </li>
 
               <li class="#">
-                <%= link_to 'Books', books_path %>
+                <%= link_to 'Books', books_path, class: "glyphicon glyphicon-book" %>
               </li>
 
               <li class="#">
-                <%= link_to 'logout', destroy_user_session_path, method:  :delete %>
+                <%= link_to 'logout', destroy_user_session_path, method:  :delete, class: "glyphicon glyphicon-share" %>
               </li>
             <% else %>
               <li class="#">
-                <%= link_to 'Home', new_user_path %>
+                <%= link_to 'Home', new_user_path, class: "glyphicon glyphicon-home" %>
               </li>
 
               <li class="#">
-                <%= link_to 'About', about_path %>
+                <%= link_to 'About', about_path, class: "glyphicon glyphicon-link" %>
               </li>
 
               <li class="#">
-                <%= link_to 'sign up', new_user_registration_path %>
+                <%= link_to 'sign up', new_user_registration_path, class: "glyphicon glyphicon-edit" %>
               </li>
 
               <li class="#">
-                <%= link_to 'login', new_user_session_path %>
+                <%= link_to 'login', new_user_session_path, class: "glyphicon glyphicon-share" %>
               </li>
             <% end %>
-      </nav>
-    </div>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    <%# </div>
+  </div>
+</div> %>
+
+
+<% flash.each do |a,b| %>
+  <div class="alert alert-success"><%= b %></div>
+<% end %>
+
+<%# devise特有のメッセージを表示しているだけ。aをキーにして、bを呼び出す。bには条件分岐で予めメッセージが変数として定義されている。 %>
+<%# deviseのコントローラをカスタマイズすることは可能。それであればviewにそれぞれflashを設定するだけでメッセージの棲み分けができる %>
+<%# bの変数を定義しているファイルが見つかれば（作成できれば）、オーバーライド？でメッセージの表示内容を変更することが可能。 %>
 
     <%= yield %>
 
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3 col-xs-offset-9">
     <footer>©Infratop.inc</footer>
+    </div>
+  </div>
+</div>
   </body>
 </html>

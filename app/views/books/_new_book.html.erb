@@ -1,0 +1,23 @@
+<h2>New book</h2>
+<%# ifでエラー分岐とform_forメソッドで記述 %>
+<%# book's'のPOSTメソッドでcreateアクションが実行されるので(複数形),url:オプションにて指定する %>
+<%= form_for(book, url: books_path) do |f| %>
+<% if book.errors.any? %>
+    <ul>
+        <%= book.errors.count %><span>error prohibited this obj from being saved</span>
+        <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+    <p>Title</p>
+    <label></label>
+    <%= f.text_field :title %>
+
+    <p>Opinion</p>
+    <label></label>
+    <%= f.text_area :body %>
+
+    <p><%= f.submit 'Create Book' %></p>
+<% end %>

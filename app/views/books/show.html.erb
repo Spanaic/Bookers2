@@ -1,21 +1,41 @@
-<h2>Book detail</h2>
+<div class="container">
 
-<table>
-    <tr>
-        <td>
-            <%= attachment_image_tag @book.user, :profile_image %>
-            <%# fillなどで大きさを編集 %>
-            <%= @book.user.name %>
-        </td>
-        <td><%= @book.title %></td>
-        <td><%= @book.body %></td>
-        <% if current_user.id == @book.user_id %>
-        <td><%= link_to 'Edit', edit_book_path(@book.id) %></td>
-        <td><%= link_to 'Destroy', book_path(@book), method:  :delete %></td>
-        <% else %>
-        <td></td>
-        <td></td>
-        <% end %>
-        <%# if文でviewの制御をするときに、分岐しても表示が変わらない時は、ちゃんとelseも記述している確認しよう %>
-    </tr>
-</table>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <% if flash[:notice] %>
+                <p><%= flash[:notice] %></p>
+            <% end %>
+            <%= render 'users/user_info' %>
+
+            <%= render 'books/new_book', book: @book %>
+
+         </div>
+
+        <div class="col-lg-9">
+
+            <h2>Book detail</h2>
+
+            <table class="table">
+                <tr>
+                    <td>
+                        <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :size => '60x60' %>
+                        <%# fillなどで大きさを編集 %>
+                        <%= @book.user.name %>
+                    </td>
+                    <td><%= @book.title %></td>
+                    <td><%= @book.body %></td>
+                    <% if current_user.id == @book.user_id %>
+                    <td><%= link_to 'Edit', edit_book_path(@book.id) %></td>
+                    <td><%= link_to 'Destroy', book_path(@book), method:  :delete %></td>
+                    <% else %>
+                    <td></td>
+                    <td></td>
+                    <% end %>
+                    <%# if文でviewの制御をするときに、分岐しても表示が変わらない時は、ちゃんとelseも記述している確認しよう %>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

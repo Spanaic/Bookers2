@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
+        @book = Book.new
+        @books = @user.books.all
+        # 変数に定義して特定したユーザのレコードに関連づいたレコードを別のモデルから探し出して、全て@booksに代入する
     end
 
     def new
@@ -18,11 +21,13 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
+        @book = Book.new
     end
 
     def update
         @user = User.find(params[:id])
         if  @user.update(user_params)
+            flash[:notice] = "You have updated user successfully."
             redirect_to user_path(@user.id)
         else
             render :edit

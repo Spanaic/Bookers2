@@ -14,10 +14,14 @@ class BooksController < ApplicationController
         # ActionController::UrlGenerationError in BooksController#create
         # カラムが埋まってなかったからidが見つけられなかった。idカラムを埋めたことでsaveができて、idを特定できるようになった
         if  @book.save
+            flash[:notice] = "You have creatad book successfully."
         # redirect_to user_path(current_user.id)
         redirect_to book_path(@book.id)
-        else
+        elsif
             render :index
+        else
+            render :show
+            #　showのrenderだと変数が困る
         end
     end
 
@@ -37,6 +41,7 @@ class BooksController < ApplicationController
         # book = Book.find(params[:id])
         @book.user_id == current_user.id
         if  @book.update(book_params)
+            flash[:notice] = "You have updated book successfully."
             redirect_to book_path(@book.id)
         else
             render :edit

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # コントローラ名は正しく複数形でね！
   # uninitialized constant UserController
 
-  resources :users, only: [:show, :new, :edit, :index, :update] do
+  resources :users, only: [:show, :new, :edit, :index, :update,] do
 
   end
 
