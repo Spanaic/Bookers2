@@ -1,0 +1,22 @@
+<%# 入力フォームを作成　エラーメッセージの実装も忘れずに！ %>
+
+<h1>Editing Book</h1>
+
+<%= form_for(@book) do |f| %>
+    <% if @book.errors.any? %>
+        <%= @book.errors.count %><span>error prohibited this obj from being saved</span>
+            <ul>
+                <% @book.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+    <% end %>
+
+        <p>Title</p>
+        <%= f.text_field :title %>
+
+        <p>Opinion</p>
+        <%= f.text_area :body %>
+
+        <%= f.submit "Update Book" %>
+<% end %>

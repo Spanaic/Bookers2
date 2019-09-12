@@ -1,0 +1,76 @@
+<h2>User info</h2>
+<%= link_to user_path(current_user.id) do %>
+    <%= attachment_image_tag current_user, :profile_image %>
+<% end %>
+
+<table>
+    <tr>
+        <th>name</th>
+        <td><%= current_user.name %></td>
+    </tr>
+
+    <tr>
+        <th>introduction</th>
+        <td><%= current_user.introduction %></td>
+    </tr>
+</table>
+
+<%# <% if current_user.id == @user.id %>
+<%# ユーザ認証で編集できるユーザを分ける %>
+<p><%= link_to "プロフィール編集Bootstrap-icom", edit_user_path(current_user.id) %></p>
+<%# <% else %>
+<%# <p><%= link_to "プロフィール編集Bootstrap-icom", user_path(current_user.id) %>
+<%# <% end %>
+<%# editアクション実行時にユーザidを検索する。その際に条件分岐でeditアクションで取得したidとcurrent_user.idが一致しているか確認する %>
+
+<h2>New book</h2>
+<%# ifでエラー分岐とform_forメソッドで記述 %>
+<%# book's'のPOSTメソッドでcreateアクションが実行されるので(複数形),url:オプションにて指定する %>
+<%= form_for(@book, url: books_path) do |f| %>
+<% if @book.errors.any? %>
+    <ul>
+        <%= @book.errors.count %><span>error prohibited this obj from being saved</span>
+        <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+    <p>Title</p>
+    <label></label>
+    <%= f.text_field :title %>
+
+    <p>Opinion</p>
+    <label></label>
+    <%= f.text_area :body %>
+
+    <%= f.submit 'Create Book' %>
+<% end %>
+
+<h2>Books</h2>
+
+<table>
+    <tr>
+        <th>Profile</th>
+        <th>Title</th>
+        <th>Opinion</th>
+    </tr>
+
+    <% @books.each do |book|%>
+        <tr>
+            <td>
+                <%= link_to user_path(book.user_id) do %>
+                    <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "/no_image_jpg" %>
+                <% end %>
+            </td>
+
+            <td>
+                <%= link_to "#{book.title}", book_path(book) %>
+            </td>
+
+            <td>
+                <%= book.body %>
+            </td>
+        </tr>
+    <% end %>
+</table>

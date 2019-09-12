@@ -1,0 +1,25 @@
+<%# form_forヘルパーメソッドで入力欄を記述していく %>
+<%# エラー文もifで記述する %>
+
+<h1>User info</h1>
+
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <ul>
+            <p><%= @user.errors.count %>errors prohibited this obj from being saved</p>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+                <span>Name</span>
+                <%= f.text_field :name %>
+
+                <p>Image</p>
+                <%= f.attachment_field :profile_image %>
+
+                <span>Introduction</span>
+                <%= f.text_area :introduction %>
+
+                <%= f.submit 'Update User' %>
+<% end %>
