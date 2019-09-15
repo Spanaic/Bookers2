@@ -33,13 +33,18 @@ class BooksController < ApplicationController
         @book_detail = Book.find(params[:id])
         @book = Book.new
         # current_user.id = @book_detail.user_id
-        @user = User.find(params[:id])
+        # @user = Book.find(params[:id])
+        # @user = User.find(params[:id])
+        @user = @book_detail.user
     end
 
     def edit
         # @user = User.find(params[:id])
         # userのeditアクションに記述かな？
         @book = Book.find(params[:id])
+        if @book.user != current_user
+            redirect_to books_path
+        end
     end
 
     def update
@@ -55,7 +60,8 @@ class BooksController < ApplicationController
     end
 
     def destroy
-        book = Book.find(params[:id])
+        @book_detail = Book.find(params[:id])
+        @book_detail.destroy
         redirect_to books_path
     end
 

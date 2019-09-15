@@ -17,18 +17,18 @@
 
             <h2>Book detail</h2>
 
-            <table class="table">
+            <table class="table table-hover">
                 <tr>
                     <td>
                         <%= attachment_image_tag @book_detail.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :size => '60x60' %>
                         <%# fillなどで大きさを編集 %>
-                        <%= @book_detail.user.name %>
+                        <p><%= link_to "#{@book_detail.user.name}", user_path(@book_detail.user) %></p>
                     </td>
                     <td><%= @book_detail.title %></td>
                     <td><%= @book_detail.body %></td>
                     <% if current_user.id == @book_detail.user_id %>
-                    <td><%= link_to 'Edit', edit_book_path(@book_detail.id) %></td>
-                    <td><%= link_to 'Destroy', book_path(@book_detail), method:  :delete %></td>
+                    <td><%= link_to 'Edit', edit_book_path(@book_detail.id), class:"btn btn-success" %></td>
+                    <td><%= link_to 'Destroy', book_path(@book_detail.id), class:"btn btn-danger destroy-font", method:  :delete %></td>
                     <% else %>
                     <td></td>
                     <td></td>

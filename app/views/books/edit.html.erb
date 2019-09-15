@@ -1,7 +1,7 @@
 <%# 入力フォームを作成　エラーメッセージの実装も忘れずに！ %>
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-6 col-md-offset-3">
 
             <h1>Editing Book</h1>
 
@@ -16,12 +16,13 @@
                 <% end %>
 
                     <p><strong>Title</strong></p>
-                    <%= f.text_field :title %>
+                    <%= f.text_field :title, class: "form-control" %>
 
                     <p><strong>Opinion</strong></p>
-                    <%= f.text_area :body %>
+                    <%= f.text_area :body, class: "form-control" %>
 
-                    <p><%= f.submit "Update Book" %></p>
+                    <p class="create-btn"><%= f.submit "Update Book", class: "btn btn-primary btn-block" %></p>
+                    <%= link_to 'Show', book_path(@book.id) %>|<%= link_to 'Back', books_path %>
             <% end %>
         </div>
     </div>
