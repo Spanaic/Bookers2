@@ -1,27 +1,27 @@
 <h2>User info</h2>
-<%= link_to user_path(current_user.id) do %>
-    <%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, format: "jpeg", fallback: "no_image.jpg", :size => '100x100' %>
+<%= link_to user_path(user.id) do %>
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: "jpeg", fallback: "no_image.jpg", :size => '100x100' %>
 <% end %>
 
 <table class="table">
     <tr>
         <th>name</th>
-        <td><%= current_user.name %></td>
+        <td><%= user.name %></td>
     </tr>
 
     <tr>
         <th>introduction</th>
-        <td><%= current_user.introduction %></td>
+        <td><%= user.introduction %></td>
     </tr>
 </table>
 
-<%# <% if current_user.id == @user.id %>
+<%# <% if user.id == @user.id %>
 <%# ユーザ認証で編集できるユーザを分ける %>
-<%= link_to edit_user_path(current_user.id) do %>
+<%= link_to edit_user_path(user.id) do %>
     <button type="button", class="btn btn-default btn-block"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 </button>
 <% end %>
 <%# <% else %>
-<%# <p><%= link_to "プロフィール編集Bootstrap-icom", user_path(current_user.id) %>
+<%# <p><%= link_to "プロフィール編集Bootstrap-icom", user_path(user.id) %>
 <%# <% end %>
 <%# editアクション実行時にユーザidを検索する。その際に条件分岐でeditアクションで取得したidとcurrent_user.idが一致しているか確認する %>

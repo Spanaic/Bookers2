@@ -11,13 +11,19 @@
     </ul>
 <% end %>
 
-    <p>Title</p>
-    <label></label>
-    <%= f.text_field :title %>
+    <%# <p><strong>Title</strong></p> %>
+    <div class="field_row">
+        <label>Title</label>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
 
-    <p>Opinion</p>
-    <label></label>
-    <%= f.text_area :body %>
-
-    <p><%= f.submit 'Create Book' %></p>
+    <%# <p><strong>Opinion</strong></p> %>
+    <div class="field_row">
+        <label>Opinion</label>
+        <%= f.text_area :body, :class => "form-control" %>
+    </div>
+    <div class="field_row create-btn">
+        <%# <button type="submit", class="btn btn-primary btn-block"><%= f.submit 'Create Book' %>
+        <%= f.submit "Create Book", :class => "btn btn-primary btn-block" %>
+    </div>
 <% end %>

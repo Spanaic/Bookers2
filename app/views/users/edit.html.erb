@@ -1,25 +1,36 @@
 <%# form_forヘルパーメソッドで入力欄を記述していく %>
 <%# エラー文もifで記述する %>
+<div class="container">
+    <div class="row">
 
-<h1>User info</h1>
+        <div class="col-12">
 
-<%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-        <ul>
-            <p><%= @user.errors.count %>errors prohibited this obj from being saved</p>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+
+            <h1>User info</h1>
+
+            <%= form_for(@user) do |f| %>
+                <% if @user.errors.any? %>
+                    <ul>
+                        <p><%= @user.errors.count %>errors prohibited this obj from being saved</p>
+                        <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                <% end %>
+                            <span><strong>Name</strong></span>
+                            <%= f.text_field :name %>
+
+                            <p><strong>Image</strong></p>
+                            <%= f.attachment_field :profile_image %>
+
+                            <span><strong>Introduction</strong></span>
+                            <%= f.text_area :introduction %>
+
+                            <p class="p-1"><%= f.submit 'Update User' %></p>
             <% end %>
-        </ul>
-    <% end %>
-                <span>Name</span>
-                <%= f.text_field :name %>
 
-                <p>Image</p>
-                <%= f.attachment_field :profile_image %>
+        </div>
 
-                <span>Introduction</span>
-                <%= f.text_area :introduction %>
+    </div>
 
-                <%= f.submit 'Update User' %>
-<% end %>
+</div>
