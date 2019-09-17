@@ -36,6 +36,10 @@ class BooksController < ApplicationController
         # @user = Book.find(params[:id])
         # @user = User.find(params[:id])
         @user = @book_detail.user
+        # 一つのアクションで2つのparams[:id]を取得しようとすると、変なことになる。
+        # paramsはなんのidを取りに行ってるのか、URLを見て判断しなければいけない。
+        # findメソッドで取得してきたレコードとアソシエートされているモデルのデータを使用することができる（アソシエーションのため）
+        # @user = @book_detail.user(_id) idは要らない。アソシエートされいているため抜いてきたレコードに紐付いたUserレコードを.userだけで利用することができる。
     end
 
     def edit

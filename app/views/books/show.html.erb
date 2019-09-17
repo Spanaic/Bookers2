@@ -20,7 +20,7 @@
             <table class="table table-hover">
                 <tr>
                     <td>
-                        <%= attachment_image_tag @book_detail.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :size => '60x60' %>
+                        <%= attachment_image_tag @book_detail.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "/images/no_image.jpg", :size => '60x60' %>
                         <%# fillなどで大きさを編集 %>
                         <p><%= link_to "#{@book_detail.user.name}", user_path(@book_detail.user) %></p>
                     </td>
